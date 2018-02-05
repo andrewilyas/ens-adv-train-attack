@@ -31,6 +31,18 @@ The code is all available! To run it yourself:
 ## Observations and Conclusions:
 First, I ran the authors' code and verified the results of the paper, which are not to be understated; the model is in fact quite robust to the substitute networks constructed. However, the effectiveness of white-box methods and particularly even coarse ones such as FGSM, suggests that a gradient-estimation attack might be the best way to proceed. Applying standard NES, interestingly, was not enough---it seems that the model has learned some first-order robustness as well, as gradient descent with NES estimates causes the adversary to get caught in plenty of plateaus, local minima, and regions with very little gradient signal. Rather than try to circumvent this with regularization/random restarts/other optimizations, we instead apply the partial-information attack from [2], (see the blog post [here](http://www.labsix.org/partial-information-adversarial-examples/), and manage to effectively construct adversarial examples even in a black-box setting. __Note that this does not invalidate any of the _formal_ claims made in [1], but instead shows that a defense that's robust to a *particular* black-box attack isn't necessarily secure in the black-box threat model. Defenses claimed to be black-box-secure benefit from being evaluated under a number of different black-box attack strategies, including substitute networks as well as the techniques presented here.
 
+## Citation
+If you use this implementation in your work, please cite the following:
+
+```
+@misc{ilyas2018ensattack,
+  author = {Andrew Ilyas},
+  title = {Circumventing the Ensemble Adversarial Training Defense},
+  year = {2018},
+  howpublished = {\url{https://github.com/andrewilyas/ens-adv-train-attack}}
+}
+```
+
 [1] https://arxiv.org/abs/1705.07204 <br />
 [2] https://arxiv.org/abs/1712.07113 <br />
 [3] https://arxiv.org/abs/1706.06083 <br /> 
